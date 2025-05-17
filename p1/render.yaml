@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: django-auth-app
+    runtime: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+    startCommand: gunicorn p1.wsgi:application
+    envVars:
+
+
+  - key: DB_ENGINE
+    value: django.db.backends.mysql
+  - key: DB_NAME
+    value: p2_db
+  - key: DB_USER
+    value: root
+  - key: DB_PASSWORD
+    value: S@16112001
+  - key: DB_HOST
+    value: localhost
+  - key: DB_PORT
+    value: "3306"
+  - key: SECRET_KEY
+    generateValue: true
+
+
+
+  envVars:
+  - key: DB_ENGINE
+    value: django.db.backends.mysql
+  - key: DB_NAME
+    value: p2_db
+  - key: DB_USER
+    value: root
+  - key: DB_PASSWORD
+    value: S@16112001
+  - key: DB_HOST
+    value: localhost
+  - key: DB_PORT
+    value: "3306"
+  - key: SECRET_KEY
+    generateValue: true

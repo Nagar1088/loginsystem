@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dashboard | Your Project</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  /* Body and container styling */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #6b5b95 100%);
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+  }
+
+  /* Abstract floating blurred shapes */
+  body::before, body::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.6;
+    z-index: 0;
+  }
+  body::before {
+    width: 450px;
+    height: 450px;
+    background: #8e2de2;
+    top: -100px;
+    left: -100px;
+    animation: float1 8s ease-in-out infinite;
+  }
+  body::after {
+    width: 400px;
+    height: 400px;
+    background: #4a00e0;
+    bottom: -120px;
+    right: -80px;
+    animation: float2 7s ease-in-out infinite;
+  }
+
+  @keyframes float1 {
+    0%, 100% { transform: translateY(0) translateX(0);}
+    50% { transform: translateY(30px) translateX(20px);}
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translateY(0) translateX(0);}
+    50% { transform: translateY(-25px) translateX(-30px);}
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 45px 60px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #e0dff7cc;
+  }
+
+  /* Dropdown container */
+  .dropdown {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    user-select: none;
+  }
+
+  /* Dropdown toggle button */
+  .dropdown-toggle {
+    background: rgba(255,255,255,0.85);
+    color: #764ba2;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dropdown-toggle:hover,
+  .dropdown-toggle:focus {
+    background: #764ba2;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+    outline: none;
+  }
+
+  /* Dropdown Setting - hidden by default */
+  .dropdown-Setting {
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 160px;
+    overflow: hidden;
+  }
+
+  /* Show dropdown on hover or when active */
+  .dropdown:hover .dropdown-Setting,
+  .dropdown:focus-within .dropdown-Setting {
+    display: flex;
+  }
+
+  /* Dropdown Setting links */
+  .dropdown-Setting a {
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #764ba2;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.25s ease;
+  }
+
+  .dropdown-Setting a:hover,
+  .dropdown-Setting a:focus {
+    background-color: #764ba2;
+    color: #fff;
+    outline: none;
+  }
+
+  /* Simple arrow icon */
+  .arrow-down {
+    border: solid #764ba2;
+    border-width: 0 2.5px 2.5px 0;
+    display: inline-block;
+    padding: 4px;
+    margin-left: 5px;
+    transform: rotate(45deg);
+    transition: border-color 0.3s ease;
+  }
+
+  .dropdown:hover .arrow-down,
+  .dropdown:focus-within .arrow-down {
+    border-color: #fff;
+  }
+
+</style>
+</head>
+<body>
+  <div class="dropdown" tabindex="0">
+    <div class="dropdown-toggle" aria-haspopup="true" aria-expanded="false" role="button">
+      Setting
+      <i class="arrow-down"></i>
+    </div>
+    <div class="dropdown-Setting" role="Setting" aria-label="User options">
+      <a href="{% url 'change_password' %}" role="Settingitem" tabindex="-1">Change Password</a>
+      <a href="{% url 'logout' %}" role="Settingitem" tabindex="-1">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Welcome, {{ request.user.first_name }}!</h1>
+    <p>This is your dashboard. You can change your password below.</p>
+  </div>
+</body>
+</html>
